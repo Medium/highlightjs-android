@@ -32,7 +32,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var language = Language.AUTO_DETECT
     private var theme = Theme.DEFAULT
     private var content: String? = null
-    private var zoomSupport = false
+    private var zoomSupport = true
     private var showLineNumbers = false
 
     //local variables to register callbacks
@@ -80,6 +80,9 @@ class HighlightJsView : WebView, FileUtils.Callback {
     @SuppressLint("SetJavaScriptEnabled")
     private fun initView(context: Context) {
         //make sure the view is blank
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true)
+        };
         loadUrl("about:blank")
         //set the settings for the view
         //WebSettings settings = getSettings();
@@ -93,8 +96,8 @@ class HighlightJsView : WebView, FileUtils.Callback {
         isScrollbarFadingEnabled = true
         val settings = settings
         settings.javaScriptEnabled = true
-        settings.loadWithOverviewMode = true
-        settings.useWideViewPort = true
+        settings.loadWithOverviewMode = false
+        settings.useWideViewPort = false
         settings.setSupportZoom(true)
         settings.builtInZoomControls = true
         settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
@@ -109,6 +112,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             settings.setRenderPriority(WebSettings.RenderPriority.HIGH)
         }
+        isHorizontalScrollBarEnabled = false;
     }
 
     private fun changeZoomSettings(enable: Boolean) {

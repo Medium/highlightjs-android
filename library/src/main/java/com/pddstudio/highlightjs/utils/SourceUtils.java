@@ -33,9 +33,17 @@ public class SourceUtils {
 				"           height: 100%;\n" +
 				"           margin: 0px;\n" +
 				"           padding: 0px;\n" +
+				"			word-wrap: break-word;\n" +
+				"			overflow-wrap: break-word;\n" +
+				"			hyphens: manual;" +
+				"		    overflow: hidden;\n"+
 				"       }\n" +
 				"       pre {\n" +
 				"           margin: 0;\n" +
+				"			word-wrap: break-word;\n" +
+				"			overflow-wrap: break-word;\n" +
+				"			hyphens: manual;" +
+				"		    overflow: hidden;\n"+
 				"       }\n" +
 				"   </style>\n";
 	}
