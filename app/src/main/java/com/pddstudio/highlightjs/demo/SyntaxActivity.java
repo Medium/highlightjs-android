@@ -33,16 +33,16 @@ public class SyntaxActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syntax);
-        FileObject fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
-        if(getActionBar() != null) {
-            assert fileObject != null;
-            getActionBar().setTitle(fileObject.getFileName());
+//        FileObject fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
+        if (getActionBar() != null) {
+/*            assert fileObject != null;
+            getActionBar().setTitle(fileObject.getFileName());*/
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            assert fileObject != null;
-            getSupportActionBar().setTitle(fileObject.getFileName());
+    /*        assert fileObject != null;
+            getSupportActionBar().setTitle(fileObject.getFileName());*/
         }
         //set and assign swipe refresh listener
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
@@ -53,14 +53,29 @@ public class SyntaxActivity extends AppCompatActivity implements
         highlightJsView.setOnThemeChangedListener(this);
         //change theme and set language to auto detect
         highlightJsView.setTheme(Theme.ANDROID_STUDIO);
-        assert fileObject != null;
-        String[] name = fileObject.getFileName().split("\\.");
+        //assert fileObject != null;
+        //String[] name = fileObject.getFileName().split("\\.");
         highlightJsView.setOnLanguageChangedListener(this);
-
-        if(name.length > 0)
-            highlightJsView.setLanguageByFileExtension(name[name.length - 1]);
+/*
+        if (name.length > 0)
+            highlightJsView.setLanguageByFileExtension(name[name.length - 1]);*/
         //load the source
-        highlightJsView.setSource(fileObject.getUrl());
+        String source = "public class MainActivity extends AppCompatActivity {\n" +
+                "\n" +
+                "    @Override\n" +
+                "    protected void onCreate(Bundle savedInstanceState) {\n" +
+                "        super.onCreate(savedInstanceState);\n" +
+                "        setContentView(R.layout.activity_main);\n" +
+                "        getSupportFragmentManager()\n" +
+                "                .beginTransaction()\n" +
+                "                .replace(R.id.activity_main, FilesListFragment.newInstance())\n" +
+                "                .commit();\n" +
+                "    }\n" +
+                "\n" +
+                "}\n";
+
+        highlightJsView.setHighlightLanguage(Language.JAVA);
+        highlightJsView.setSource(source);
     }
 
     @Override
@@ -69,44 +84,44 @@ public class SyntaxActivity extends AppCompatActivity implements
         themeChangerDialog = new ThemeChangerDialog(this);
     }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		new MenuInflater(this).inflate(R.menu.menu_theme_switch, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(this).inflate(R.menu.menu_theme_switch, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:
-				onBackPressed();
-				break;
-			case R.id.menu_switch_theme:
-				themeChangerDialog.show(this);
-				break;
-			case R.id.menu_check_line_numbers:
-				item.setChecked(!item.isChecked());
-				onShowLineNumbersToggled(item.isChecked());
-				break;
-			case R.id.menu_check_zoom:
-				item.setChecked(!item.isChecked());
-				onZoomSupportToggled(item.isChecked());
-				break;
-			default:
-				break;
-		}
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.menu_switch_theme:
+                themeChangerDialog.show(this);
+                break;
+            case R.id.menu_check_line_numbers:
+                item.setChecked(!item.isChecked());
+                onShowLineNumbersToggled(item.isChecked());
+                break;
+            case R.id.menu_check_zoom:
+                item.setChecked(!item.isChecked());
+                onZoomSupportToggled(item.isChecked());
+                break;
+            default:
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     private void onShowLineNumbersToggled(boolean enableLineNumbers) {
-		highlightJsView.setShowLineNumbers(enableLineNumbers);
-		highlightJsView.refresh();
-	}
+        highlightJsView.setShowLineNumbers(enableLineNumbers);
+        highlightJsView.refresh();
+    }
 
-	private void onZoomSupportToggled(boolean enableZooming) {
-		highlightJsView.setZoomSupportEnabled(enableZooming);
-		highlightJsView.refresh();
-	}
+    private void onZoomSupportToggled(boolean enableZooming) {
+        highlightJsView.setZoomSupportEnabled(enableZooming);
+        highlightJsView.refresh();
+    }
 
     @Override
     public void onRefresh() {

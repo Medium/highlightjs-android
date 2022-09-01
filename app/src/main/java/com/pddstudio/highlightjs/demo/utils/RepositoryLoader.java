@@ -50,7 +50,6 @@ public class RepositoryLoader {
 	public void loadFiles(Callback callback) {
 		this.callback = callback;
 		new RepoLoader().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
 	}
 
 	private class RepoLoader extends AsyncTask<Void, FileObject, Void> {
