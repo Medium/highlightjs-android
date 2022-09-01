@@ -38,6 +38,7 @@ def getRepositoryUsername() {
 def getRepositoryPassword() {
     return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
 }
+/*
 
 afterEvaluate { project ->
     uploadArchives {
@@ -109,4 +110,4 @@ afterEvaluate { project ->
     artifacts {
         archives androidSourcesJar
     }
-}
+}*/
