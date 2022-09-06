@@ -60,9 +60,7 @@ public class FilesListFragment extends Fragment implements RepositoryLoader.Call
     }
 
     @Override
-    public void onFilesLoaded(List<FileObject> fileObjects) {
-        Log.e("Alex", "1");
-    }
+    public void onFilesLoaded(List<FileObject> fileObjects) {}
 
     @Override
     public void onItemSelected(int position) {
