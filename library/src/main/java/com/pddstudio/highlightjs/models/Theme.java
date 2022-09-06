@@ -68,6 +68,8 @@ public enum Theme {
     LIGHTFAIR("lightfair"),
     LIOSHI("lioshi"),
     MAGULA("magula"),
+    MEDIUM_DARK("medium-dark"),
+    MEDIUM_LIGHT("medium-light"),
     MONO_BLUE("mono-blue"),
     MONOKAI("monokai"),
     MONOKAI_SUBLIME("monokai-sublime"),

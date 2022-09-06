@@ -1,5 +1,6 @@
 package com.pddstudio.highlightjs.demo;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,7 +53,7 @@ public class SyntaxActivity extends AppCompatActivity implements
         //register theme change listener
         highlightJsView.setOnThemeChangedListener(this);
         //change theme and set language to auto detect
-        highlightJsView.setTheme(Theme.ANDROID_STUDIO);
+        highlightJsView.setTheme(Theme.MEDIUM_LIGHT);
         //assert fileObject != null;
         //String[] name = fileObject.getFileName().split("\\.");
         highlightJsView.setOnLanguageChangedListener(this);
