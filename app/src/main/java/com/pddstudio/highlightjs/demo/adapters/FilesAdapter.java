@@ -79,6 +79,5 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.ViewHolder> 
         public void onClick(View v) {
            if(onItemSelectedListener != null) onItemSelectedListener.onItemSelected(getAdapterPosition());
         }
-
     }
 }
