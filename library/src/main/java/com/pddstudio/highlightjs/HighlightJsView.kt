@@ -13,8 +13,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
+import android.webkit.JavascriptInterface
+import android.webkit.ValueCallback
 import android.webkit.WebSettings
 import com.pddstudio.highlightjs.models.Language
+import com.pddstudio.highlightjs.models.SelectionCallback
 import com.pddstudio.highlightjs.models.Theme
 import com.pddstudio.highlightjs.utils.ExtensionUtil
 import com.pddstudio.highlightjs.utils.FileUtils
@@ -39,6 +42,8 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var onLanguageChangedListener: OnLanguageChangedListener? = null
     private var onThemeChangedListener: OnThemeChangedListener? = null
     private var onContentChangedListener: OnContentChangedListener? = null
+    var onSelectionChange: SelectionCallback? = null
+
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
     }
@@ -112,7 +117,14 @@ class HighlightJsView : WebView, FileUtils.Callback {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             settings.setRenderPriority(WebSettings.RenderPriority.HIGH)
         }
-        isHorizontalScrollBarEnabled = false;
+        isHorizontalScrollBarEnabled = false
+
+        this.evaluateJavascript(
+            "(function(){return window.getSelection().toString()})()"
+        ) { value ->
+            Log.e("Alex", value)
+        }
+        this.addJavascriptInterface(JsInterface(), "jsBridge")
     }
 
     private fun changeZoomSettings(enable: Boolean) {
@@ -255,5 +267,17 @@ class HighlightJsView : WebView, FileUtils.Callback {
      */
     fun setShowLineNumbers(showLineNumbers: Boolean) {
         this.showLineNumbers = showLineNumbers
+    }
+
+    inner class JsInterface() {
+        @JavascriptInterface
+        fun onSelectionChange(value: String) {
+            val start = content?.indexOf(value)
+            onSelectionChange?.onSelectionChange(
+                start?.let {
+                    content?.subSequence(it, it + value.length).toString()
+                }
+            )
+        }
     }
 }
