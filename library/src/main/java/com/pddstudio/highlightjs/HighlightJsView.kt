@@ -271,8 +271,8 @@ class HighlightJsView : WebView, FileUtils.Callback {
 
     inner class JsInterface() {
         @JavascriptInterface
-        fun onSelectionChange(value: String) {
-            val start = content?.indexOf(value)
+        fun onSelectionChange(value: String?) {
+            val start = value?.let { content?.indexOf(it) }
             onSelectionChange?.onSelectionChange(
                 start?.let {
                     content?.subSequence(it, it + value.length).toString()
