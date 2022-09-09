@@ -27,7 +27,6 @@ function setup() {
     document.oncontextmenu = function(e) { e.preventDefault(); };
     document.onselectionchange = common.onSelectionChange;
 
-    console.log("Alex setup");
     return common;
 }
 
