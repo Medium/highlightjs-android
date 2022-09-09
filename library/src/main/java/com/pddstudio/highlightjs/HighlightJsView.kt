@@ -37,6 +37,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var onLanguageChangedListener: OnLanguageChangedListener? = null
     private var onThemeChangedListener: OnThemeChangedListener? = null
     private var onContentChangedListener: OnContentChangedListener? = null
+
     var selectionCallback: SelectionCallback? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
@@ -262,9 +263,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     inner class JsInterface() {
         @JavascriptInterface
         fun onSelectionChange(value: String?) {
-            selectionCallback?.onSelectionChange(
-                value
-            )
+            selectionCallback?.onSelectionChange(value)
         }
     }
 }

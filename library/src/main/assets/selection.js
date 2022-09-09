@@ -11,16 +11,15 @@ var selection = {
     },
 
     notifySelection: function() {
-            var selection = document.getSelection();
-
-            if (selection.anchorNode == null || selection.focusNode == null || selection.isCollapsed) {
-                jsBridge.onSelectionChange(null);
-                return;
-            }
+        var selection = document.getSelection();
+        if (selection.anchorNode == null || selection.focusNode == null || selection.isCollapsed) {
+            jsBridge.onSelectionChange(null);
+        } else {
             jsBridge.onSelectionChange(
                 selection.toString()
             );
-        },
+        }
+    },
 
     setup: function(){
         document.oncontextmenu = function(e) { e.preventDefault(); };
