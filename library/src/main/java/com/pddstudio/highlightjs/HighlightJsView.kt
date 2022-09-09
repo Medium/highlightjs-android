@@ -119,11 +119,6 @@ class HighlightJsView : WebView, FileUtils.Callback {
         }
         isHorizontalScrollBarEnabled = false
 
-        this.evaluateJavascript(
-            "(function(){return window.getSelection().toString()})()"
-        ) { value ->
-            Log.e("Alex", value)
-        }
         this.addJavascriptInterface(JsInterface(), "jsBridge")
     }
 
