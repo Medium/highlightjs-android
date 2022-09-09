@@ -1,20 +1,21 @@
 package com.pddstudio.highlightjs.demo;
 
-import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.pddstudio.highlightjs.HighlightJsView;
-import com.pddstudio.highlightjs.demo.utils.FileObject;
 import com.pddstudio.highlightjs.demo.utils.ThemeChangerDialog;
 import com.pddstudio.highlightjs.models.Language;
+import com.pddstudio.highlightjs.models.SelectionCallback;
 import com.pddstudio.highlightjs.models.Theme;
 
 import java.util.Random;
@@ -77,6 +78,12 @@ public class SyntaxActivity extends AppCompatActivity implements
 
         highlightJsView.setHighlightLanguage(Language.JAVA);
         highlightJsView.setSource(source);
+        highlightJsView.setSelectionCallback(new SelectionCallback() {
+            @Override
+            public void onSelectionChange(@Nullable String selectedText) {
+                Log.d("SyntaxActivity:onSelectionChange", selectedText);
+            }
+        });
     }
 
     @Override

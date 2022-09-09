@@ -44,8 +44,8 @@ public class SourceUtils {
 		return "    <script src=\"./highlight.pack.js\"></script>\n" +
 				(showLineNumbers ? "<script src=\"./highlightjs-line-numbers.min.js\"></script>\n" : "") +
 				"    <script>hljs.initHighlightingOnLoad();</script>\n" +
-				"<script src=\"./selection.js\"></script>\n" +
-				"    <script>setup();</script>\n" +
+				"	 <script src=\"./selection.js\"></script>\n" +
+				"    <script>selection.setup();</script>\n" +
 				(showLineNumbers ? "<script>hljs.initLineNumbersOnLoad();</script>\n" : "") +
 				"</head>\n" +
 				"<body style=\"margin: 0; padding: 0\" class=\"hljs\">\n";

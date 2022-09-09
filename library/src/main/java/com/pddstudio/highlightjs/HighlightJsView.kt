@@ -4,9 +4,6 @@ import com.pddstudio.highlightjs.utils.ExtensionUtil.getLanguageByExtension
 import com.pddstudio.highlightjs.utils.FileUtils.loadSourceFromFile
 import com.pddstudio.highlightjs.utils.FileUtils.loadSourceFromUrl
 import android.webkit.WebView
-import com.pddstudio.highlightjs.HighlightJsView.OnLanguageChangedListener
-import com.pddstudio.highlightjs.HighlightJsView.OnThemeChangedListener
-import com.pddstudio.highlightjs.HighlightJsView.OnContentChangedListener
 import android.annotation.TargetApi
 import android.os.Build
 import android.annotation.SuppressLint
@@ -14,12 +11,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.webkit.JavascriptInterface
-import android.webkit.ValueCallback
 import android.webkit.WebSettings
 import com.pddstudio.highlightjs.models.Language
 import com.pddstudio.highlightjs.models.SelectionCallback
 import com.pddstudio.highlightjs.models.Theme
-import com.pddstudio.highlightjs.utils.ExtensionUtil
 import com.pddstudio.highlightjs.utils.FileUtils
 import com.pddstudio.highlightjs.utils.SourceUtils
 import java.io.File
@@ -42,7 +37,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var onLanguageChangedListener: OnLanguageChangedListener? = null
     private var onThemeChangedListener: OnThemeChangedListener? = null
     private var onContentChangedListener: OnContentChangedListener? = null
-    var onSelectionChange: SelectionCallback? = null
+    var selectionCallback: SelectionCallback? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
@@ -267,11 +262,8 @@ class HighlightJsView : WebView, FileUtils.Callback {
     inner class JsInterface() {
         @JavascriptInterface
         fun onSelectionChange(value: String?) {
-            val start = value?.let { content?.indexOf(it) }
-            onSelectionChange?.onSelectionChange(
-                start?.let {
-                    content?.subSequence(it, it + value.length).toString()
-                }
+            selectionCallback?.onSelectionChange(
+                value
             )
         }
     }

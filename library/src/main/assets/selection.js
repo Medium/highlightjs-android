@@ -1,10 +1,10 @@
-var common = {
+var selection = {
     onSelectionChange: function() {
-        clearTimeout(common.selectionTimer);
-        common.selectionTimer = setTimeout(
+        clearTimeout(selection.selectionTimer);
+        selection.selectionTimer = setTimeout(
             function () {
-                common.selectionTimer = null;
-                common.notifySelection();
+                selection.selectionTimer = null;
+                selection.notifySelection();
             },
             100
         );
@@ -21,12 +21,12 @@ var common = {
                 selection.toString()
             );
         },
+
+    setup: function(){
+        document.oncontextmenu = function(e) { e.preventDefault(); };
+        document.onselectionchange = selection.onSelectionChange;
+
+        return selection;
+    },
 };
-
-function setup() {
-    document.oncontextmenu = function(e) { e.preventDefault(); };
-    document.onselectionchange = common.onSelectionChange;
-
-    return common;
-}
 
