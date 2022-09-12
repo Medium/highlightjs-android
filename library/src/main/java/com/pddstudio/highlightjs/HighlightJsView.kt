@@ -4,19 +4,17 @@ import com.pddstudio.highlightjs.utils.ExtensionUtil.getLanguageByExtension
 import com.pddstudio.highlightjs.utils.FileUtils.loadSourceFromFile
 import com.pddstudio.highlightjs.utils.FileUtils.loadSourceFromUrl
 import android.webkit.WebView
-import com.pddstudio.highlightjs.HighlightJsView.OnLanguageChangedListener
-import com.pddstudio.highlightjs.HighlightJsView.OnThemeChangedListener
-import com.pddstudio.highlightjs.HighlightJsView.OnContentChangedListener
 import android.annotation.TargetApi
 import android.os.Build
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
+import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
 import com.pddstudio.highlightjs.models.Language
+import com.pddstudio.highlightjs.models.SelectionCallback
 import com.pddstudio.highlightjs.models.Theme
-import com.pddstudio.highlightjs.utils.ExtensionUtil
 import com.pddstudio.highlightjs.utils.FileUtils
 import com.pddstudio.highlightjs.utils.SourceUtils
 import java.io.File
@@ -39,6 +37,9 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var onLanguageChangedListener: OnLanguageChangedListener? = null
     private var onThemeChangedListener: OnThemeChangedListener? = null
     private var onContentChangedListener: OnContentChangedListener? = null
+
+    var selectionCallback: SelectionCallback? = null
+
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
     }
@@ -112,7 +113,9 @@ class HighlightJsView : WebView, FileUtils.Callback {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             settings.setRenderPriority(WebSettings.RenderPriority.HIGH)
         }
-        isHorizontalScrollBarEnabled = false;
+        isHorizontalScrollBarEnabled = false
+
+        this.addJavascriptInterface(JsInterface(), "jsBridge")
     }
 
     private fun changeZoomSettings(enable: Boolean) {
@@ -255,5 +258,12 @@ class HighlightJsView : WebView, FileUtils.Callback {
      */
     fun setShowLineNumbers(showLineNumbers: Boolean) {
         this.showLineNumbers = showLineNumbers
+    }
+
+    inner class JsInterface() {
+        @JavascriptInterface
+        fun onSelectionChange(value: String?) {
+            selectionCallback?.onSelectionChange(value)
+        }
     }
 }
