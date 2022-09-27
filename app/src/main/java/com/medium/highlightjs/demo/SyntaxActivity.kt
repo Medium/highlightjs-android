@@ -14,9 +14,11 @@ import com.medium.highlightjs.HighlightJsView.OnLanguageChangedListener
 import com.medium.highlightjs.HighlightJsView.OnThemeChangedListener
 import com.medium.highlightjs.demo.utils.ThemeChangerDialog
 import com.medium.highlightjs.demo.utils.ThemeChangerDialog.ThemeChangeListener
+import com.medium.highlightjs.models.Highlight
 import com.medium.highlightjs.models.Language
 import com.medium.highlightjs.models.SelectionCallback
 import com.medium.highlightjs.models.Theme
+import timber.log.Timber
 import java.util.*
 
 class SyntaxActivity : AppCompatActivity(), OnRefreshListener, OnThemeChangedListener, ThemeChangeListener,
@@ -70,7 +72,30 @@ class SyntaxActivity : AppCompatActivity(), OnRefreshListener, OnThemeChangedLis
 }
 """
         highlightJsView?.highlightLanguage = Language.JAVA
-        highlightJsView?.setSource(source)
+        highlightJsView?.setSource(source, listOf(
+            Highlight(
+                startOffset = 1,
+                endOffset = 12,
+               /* {
+                    Timber.e("Alex click first highlight")
+                }*/
+            ),
+            Highlight(
+                startOffset = 15,
+                endOffset = 40/*,
+                {
+                    Timber.e("Alex click second highlight")
+                }*/
+            ),
+            Highlight(
+                startOffset = 78,
+                endOffset = 200/*,
+                {
+                    Timber.e("Alex click second highlight")
+                }*/
+            ),
+        )
+        )
         highlightJsView?.selectionCallback = object : SelectionCallback {
             override fun onSelectionChange(selectedText: String?) {
                 Log.d("SyntaxActivity:onSelectionChange", selectedText!!)

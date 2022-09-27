@@ -12,6 +12,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
+import com.medium.highlightjs.models.Highlight
 import com.medium.highlightjs.models.Language
 import com.medium.highlightjs.models.SelectionCallback
 import com.medium.highlightjs.models.Theme
@@ -197,10 +198,14 @@ class HighlightJsView : WebView, FileUtils.Callback {
      * @param source - The source as [String]
      */
     fun setSource(source: String?) {
+        setSource(source, emptyList())
+    }
+
+    fun setSource(source: String?, list: List<Highlight>) {
         if (source != null && source.length != 0) {
             //generate and load the content
             content = source
-            val page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers)
+            val page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers, list)
             val start = System.currentTimeMillis()
             try {
                 loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null)
