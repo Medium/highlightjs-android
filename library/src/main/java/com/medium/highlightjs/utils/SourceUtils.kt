@@ -42,7 +42,7 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
            margin: 0;
        }
        
-       #gl-highlights-container {
+#gl-highlights-container {
     position: relative;
     user-select: none;
     touch-action: none;
