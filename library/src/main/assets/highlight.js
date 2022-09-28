@@ -37,9 +37,6 @@ var highlights = {
         highlights.findNodeForIndex(highlight.endOffset, false, range);
 
         var inset = 2;
-        console.log("out=");
-        console.log(range.startOffset);
-        console.log(range.endOffset);
         var rects = range.getClientRects();
         ranges.push(range);
         for (var i = 0; i < rects.length; i++) {
@@ -74,7 +71,6 @@ var highlights = {
     },
 
     processNode: function(nodeInfo) {
-        console.log("Alex charcount "+ nodeInfo.charCount);
         if(nodeInfo.node.nodeType == Node.ELEMENT_NODE) {
             var nextNodeProcess = Object.assign({}, nodeInfo);;
             var currentNodes = nextNodeProcess.node.childNodes;
