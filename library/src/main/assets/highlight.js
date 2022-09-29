@@ -24,7 +24,11 @@ var highlights = {
         }
 
         for (var i = 0; i < highlights.items.length; i++) {
-            highlights._addHighlightOverlays(highlights.items[i], "gl-highlight-overlay-mine");
+            if(highlights.items[i].isMine) {
+                highlights._addHighlightOverlays(highlights.items[i], "gl-highlight-overlay-mine");
+            } else {
+                highlights._addHighlightOverlays(highlights.items[i], "gl-highlight-overlay-other");
+            }
         }
     },
 

@@ -12,10 +12,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
-import com.medium.highlightjs.models.Highlight
-import com.medium.highlightjs.models.Language
-import com.medium.highlightjs.models.SelectionCallback
-import com.medium.highlightjs.models.Theme
+import com.medium.highlightjs.models.*
 import com.medium.highlightjs.utils.FileUtils
 import com.medium.highlightjs.utils.SourceUtils
 import java.io.File
@@ -39,6 +36,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var onThemeChangedListener: OnThemeChangedListener? = null
     private var onContentChangedListener: OnContentChangedListener? = null
 
+    var colorSet: ColorSet = ColorSet()
     var selectionCallback: SelectionCallback? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
@@ -205,7 +203,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
         if (source != null && source.length != 0) {
             //generate and load the content
             content = source
-            val page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers, list)
+            val page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers, list, colorSet)
             val start = System.currentTimeMillis()
             try {
                 loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null)

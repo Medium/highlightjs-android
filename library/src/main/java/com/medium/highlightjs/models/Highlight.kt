@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Highlight(
     val startOffset: Int,
-    val endOffset: Int/*,
-    val onClick: (() -> Unit)*/
+    val endOffset: Int,
+    val isMine: Boolean
 )

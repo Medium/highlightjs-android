@@ -1,5 +1,6 @@
 package com.medium.highlightjs.utils
 
+import com.medium.highlightjs.models.ColorSet
 import com.medium.highlightjs.models.Highlight
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -16,9 +17,10 @@ object SourceUtils {
         language: String?,
         supportZoom: Boolean,
         showLineNumbers: Boolean,
-        highlights: List<Highlight>
+        highlights: List<Highlight>,
+        colorSet:ColorSet
     ): String {
-        return getStylePageHeader(supportZoom) +
+        return getStylePageHeader(supportZoom, colorSet) +
                 getSourceForStyle(style) +
                 (if (showLineNumbers) lineNumberStyling else "") +
                 getScriptPageHeader(showLineNumbers, highlights = highlights) +
@@ -26,7 +28,7 @@ object SourceUtils {
                 templateFooter
     }
 
-    private fun getStylePageHeader(enableZoom: Boolean): String {
+    private fun getStylePageHeader(enableZoom: Boolean, colorSet: ColorSet): String {
         return """<!DOCTYPE html>
 <html>
 <head>
@@ -56,12 +58,12 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 }
 
 .gl-highlight-overlay-mine {
-    background-color: RED;
+    background-color: ${colorSet.mine};
     mix-blend-mode: darken;
 }
 
 .gl-highlight-overlay-other {
-    background-color: RED;
+    background-color: ${colorSet.others};
     mix-blend-mode: darken;
 }
    </style>

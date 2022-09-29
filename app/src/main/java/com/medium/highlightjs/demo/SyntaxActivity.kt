@@ -76,23 +76,17 @@ class SyntaxActivity : AppCompatActivity(), OnRefreshListener, OnThemeChangedLis
             Highlight(
                 startOffset = 1,
                 endOffset = 12,
-               /* {
-                    Timber.e("Alex click first highlight")
-                }*/
+                false
             ),
             Highlight(
                 startOffset = 15,
-                endOffset = 40/*,
-                {
-                    Timber.e("Alex click second highlight")
-                }*/
+                endOffset = 40,
+                true
             ),
             Highlight(
                 startOffset = 78,
-                endOffset = 200/*,
-                {
-                    Timber.e("Alex click second highlight")
-                }*/
+                endOffset = 200,
+                false
             ),
         )
         )
