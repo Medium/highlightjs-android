@@ -25,14 +25,14 @@ var highlights = {
 
         for (var i = 0; i < highlights.items.length; i++) {
             if(highlights.items[i].isMine) {
-                highlights._addHighlightOverlays(highlights.items[i], "gl-highlight-overlay-mine");
+                highlights._addHighlightOverlays(i, highlights.items[i], "gl-highlight-overlay-mine");
             } else {
-                highlights._addHighlightOverlays(highlights.items[i], "gl-highlight-overlay-other");
+                highlights._addHighlightOverlays(i, highlights.items[i], "gl-highlight-overlay-other");
             }
         }
     },
 
-    _addHighlightOverlays: function(highlight, additionalClassName) {
+    _addHighlightOverlays: function(index, highlight, additionalClassName) {
 
         var containerRect = highlights.container.getBoundingClientRect();
         var range = document.createRange();
@@ -48,7 +48,8 @@ var highlights = {
             var overlay = document.createElement("div");
             overlay.classList.add("gl-highlight-overlay");
             overlay.classList.add(additionalClassName);
-            overlay.range = range;
+            overlay.index = index;
+            overlay.setAttribute('index', index.toString())
             overlay.style.left = (r.left - containerRect.left - inset) + "px";
             overlay.style.top = (r.top - containerRect.top - inset) + "px";
             overlay.style.width = (r.width + 2 * inset) + "px";
@@ -122,8 +123,7 @@ var highlights = {
             for (var rectIndex = 0; rectIndex < clientRectList.length; rectIndex++) {
                 var rect = clientRectList[rectIndex];
                 if( rect.left <= posX && rect.right >= posX && rect.top <= posY && rect.bottom >= posY) {
-                    document.getSelection().removeAllRanges();
-                    document.getSelection().addRange(highlightsChildren[index].range);
+                    jsBridge.onHighlightClick(highlightsChildren[index].index);
                     return true;
                 }
             }

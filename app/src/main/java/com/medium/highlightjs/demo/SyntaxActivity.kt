@@ -72,27 +72,39 @@ class SyntaxActivity : AppCompatActivity(), OnRefreshListener, OnThemeChangedLis
 }
 """
         highlightJsView?.highlightLanguage = Language.JAVA
-        highlightJsView?.setSource(source, listOf(
-            Highlight(
-                startOffset = 1,
-                endOffset = 12,
-                false
-            ),
-            Highlight(
-                startOffset = 15,
-                endOffset = 40,
-                true
-            ),
-            Highlight(
-                startOffset = 78,
-                endOffset = 200,
-                false
-            ),
-        )
+        highlightJsView?.setSource(
+            source, listOf(
+                Highlight(
+                    startOffset = 1,
+                    endOffset = 12,
+                    false
+                ),
+                Highlight(
+                    startOffset = 15,
+                    endOffset = 40,
+                    true
+                ),
+                Highlight(
+                    startOffset = 78,
+                    endOffset = 200,
+                    false
+                ),
+            ), listOf(
+                {
+                    Log.e("Alex", "0")
+                },
+                {
+                    Log.e("Alex", "1")
+                },
+                {
+                    Log.e("Alex", "2")
+                },
+
+                )
         )
         highlightJsView?.selectionCallback = object : SelectionCallback {
             override fun onSelectionChange(selectedText: String?) {
-                Log.d("SyntaxActivity:onSelectionChange", selectedText!!)
+                Log.d("SyntaxActivity:onSelectionChange", selectedText.orEmpty())
             }
         }
     }

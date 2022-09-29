@@ -28,6 +28,8 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var language = Language.AUTO_DETECT
     private var theme = Theme.DEFAULT
     private var content: String? = null
+    private var highlights: List<Highlight> = emptyList()
+    private var highlightListener: List<(() -> Unit)> = emptyList()
     private var zoomSupport = true
     private var showLineNumbers = false
 
@@ -196,14 +198,24 @@ class HighlightJsView : WebView, FileUtils.Callback {
      * @param source - The source as [String]
      */
     fun setSource(source: String?) {
-        setSource(source, emptyList())
+        setSource(source, emptyList(), emptyList())
     }
 
-    fun setSource(source: String?, list: List<Highlight>) {
+    fun setSource(source: String?, list: List<Highlight>, listeners: List<(() -> Unit)>) {
         if (source != null && source.length != 0) {
             //generate and load the content
             content = source
-            val page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers, list, colorSet)
+            highlights = list
+            highlightListener = listeners
+            val page = SourceUtils.generateContent(
+                source,
+                theme.getName(),
+                language.getName(),
+                zoomSupport,
+                showLineNumbers,
+                list,
+                colorSet
+            )
             val start = System.currentTimeMillis()
             try {
                 loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null)
@@ -267,6 +279,11 @@ class HighlightJsView : WebView, FileUtils.Callback {
         @JavascriptInterface
         fun onSelectionChange(value: String?) {
             selectionCallback?.onSelectionChange(value)
+        }
+
+        @JavascriptInterface
+        fun onHighlightClick(index: Int) {
+            highlightListener[index]()
         }
     }
 }
