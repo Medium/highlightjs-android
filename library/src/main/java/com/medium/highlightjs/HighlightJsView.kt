@@ -38,7 +38,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var onThemeChangedListener: OnThemeChangedListener? = null
     private var onContentChangedListener: OnContentChangedListener? = null
 
-    var colorSet: ColorSet = ColorSet()
+    var colorSet: ColorSet = ColorSet(mine = "#85F8CA", others= "#E5FDF3")
     var selectionCallback: SelectionCallback? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
