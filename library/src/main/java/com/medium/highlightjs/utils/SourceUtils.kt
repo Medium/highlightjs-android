@@ -18,13 +18,14 @@ object SourceUtils {
         supportZoom: Boolean,
         showLineNumbers: Boolean,
         highlights: List<Highlight>,
-        colorSet:ColorSet
+        colorSet: ColorSet,
+        editMode: Boolean
     ): String {
         return getStylePageHeader(supportZoom, colorSet) +
                 getSourceForStyle(style) +
                 (if (showLineNumbers) lineNumberStyling else "") +
                 getScriptPageHeader(showLineNumbers, highlights = highlights) +
-                getSourceForLanguage(source, language) +
+                getSourceForLanguage(source, language, editMode) +
                 templateFooter
     }
 
@@ -77,9 +78,29 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
             <script>selection.setup();</script>
            	<script src="./highlight.js"></script>
            	<script>
+                const debounce = (func, delay) => {
+                    let debounceTimer
+                    return function() {
+                        const context = this
+                        const args = arguments
+                            clearTimeout(debounceTimer)
+                                debounceTimer
+                            = setTimeout(() => func.apply(context, args), delay)
+                        }
+                }
+           
                 function onLoaded() {
                     setupHighlights(document.getElementById('gl-highlights-container'));
                     applyHighlights(${Json.encodeToString(highlights)});
+                    var codeElement = document.getElementsByTagName("code")[0];
+                    codeElement.addEventListener('input', debounce(function(event) {
+                        var oldRange = window.getSelection().getRangeAt(0).cloneRange();
+                        latestLoad = Date.now();
+                        hljs.initHighlighting.called = false;
+                        hljs.initHighlighting();
+                        document.getSelection().removeAllRanges()
+                        document.getSelection().addRange(oldRange)
+                    }, 3000));
                 }
             </script>
             ${if (showLineNumbers) "<script>hljs.initLineNumbersOnLoad();</script>\n" else ""}</head>
@@ -115,15 +136,27 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
         return String.format("<link rel=\"stylesheet\" href=\"./styles/%s.css\">\n", style)
     }
 
-    private fun getSourceForLanguage(source: String, language: String?): String {
-        return if (language != null) {
-            String.format(
-                "<pre><code class=\"%s\">%s</code></pre>\n",
-                language,
-                formatCode(source)
-            )
+    private fun getSourceForLanguage(source: String, language: String?, editMode: Boolean): String {
+        return if (editMode) {
+            if (language != null) {
+                String.format(
+                    "<pre><code contentEditable=\"true\" class=\"%s\">%s</code></pre>\n",
+                    language,
+                    formatCode(source)
+                )
+            } else {
+                String.format("<pre><code contentEditable=\"true\">%s</code></pre>\n", formatCode(source))
+            }
         } else {
-            String.format("<pre><code>%s</code></pre>\n", formatCode(source))
+            if (language != null) {
+                String.format(
+                    "<pre><code class=\"%s\">%s</code></pre>\n",
+                    language,
+                    formatCode(source)
+                )
+            } else {
+                String.format("<pre><code>%s</code></pre>\n", formatCode(source))
+            }
         }
     }
 }

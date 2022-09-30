@@ -15,6 +15,8 @@ import android.webkit.WebSettings
 import com.medium.highlightjs.models.*
 import com.medium.highlightjs.utils.FileUtils
 import com.medium.highlightjs.utils.SourceUtils
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import java.io.File
 import java.net.URL
 
@@ -38,8 +40,9 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var onThemeChangedListener: OnThemeChangedListener? = null
     private var onContentChangedListener: OnContentChangedListener? = null
 
-    var colorSet: ColorSet = ColorSet(mine = "#85F8CA", others= "#E5FDF3")
+    var colorSet: ColorSet = ColorSet(mine = "#85F8CA", others = "#E5FDF3")
     var selectionCallback: SelectionCallback? = null
+    var editMode: Boolean = false
 
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
@@ -201,7 +204,11 @@ class HighlightJsView : WebView, FileUtils.Callback {
         setSource(source, emptyList(), emptyList())
     }
 
-    fun setSource(source: String?, list: List<Highlight>, listeners: List<(() -> Unit)>) {
+    fun setSource(
+        source: String?,
+        list: List<Highlight>,
+        listeners: List<(() -> Unit)>
+    ) {
         if (source != null && source.length != 0) {
             //generate and load the content
             content = source
@@ -214,7 +221,8 @@ class HighlightJsView : WebView, FileUtils.Callback {
                 zoomSupport,
                 showLineNumbers,
                 list,
-                colorSet
+                colorSet,
+                editMode
             )
             val start = System.currentTimeMillis()
             try {
@@ -284,6 +292,15 @@ class HighlightJsView : WebView, FileUtils.Callback {
         @JavascriptInterface
         fun onHighlightClick(index: Int) {
             highlightListener[index]()
+        }
+
+        @JavascriptInterface
+        fun contentEdited(newContent:String) {
+            MainScope().launch {
+                setSource(
+                    newContent
+                )
+            }
         }
     }
 }
