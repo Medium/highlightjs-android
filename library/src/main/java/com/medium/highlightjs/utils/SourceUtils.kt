@@ -137,26 +137,14 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
     }
 
     private fun getSourceForLanguage(source: String, language: String?, editMode: Boolean): String {
-        return if (editMode) {
-            if (language != null) {
-                String.format(
-                    "<pre><code contentEditable=\"true\" class=\"%s\">%s</code></pre>\n",
-                    language,
-                    formatCode(source)
-                )
-            } else {
-                String.format("<pre><code contentEditable=\"true\">%s</code></pre>\n", formatCode(source))
-            }
+        return if (language != null) {
+            String.format(
+                "<pre><code ${if (editMode)"contentEditable=\"true\"" else ""} class=\"%s\">%s</code></pre>\n",
+                language,
+                formatCode(source)
+            )
         } else {
-            if (language != null) {
-                String.format(
-                    "<pre><code class=\"%s\">%s</code></pre>\n",
-                    language,
-                    formatCode(source)
-                )
-            } else {
-                String.format("<pre><code>%s</code></pre>\n", formatCode(source))
-            }
+            String.format("<pre><code ${if (editMode)"contentEditable=\"true\"" else ""}>%s</code></pre>\n", formatCode(source))
         }
     }
 }

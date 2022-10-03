@@ -293,14 +293,5 @@ class HighlightJsView : WebView, FileUtils.Callback {
         fun onHighlightClick(index: Int) {
             highlightListener[index]()
         }
-
-        @JavascriptInterface
-        fun contentEdited(newContent:String) {
-            MainScope().launch {
-                setSource(
-                    newContent
-                )
-            }
-        }
     }
 }
