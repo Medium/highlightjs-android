@@ -95,12 +95,12 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                     var codeElement = document.getElementsByTagName("code")[0];
                     codeElement.addEventListener('input', debounce(function(event) {
                         var oldRange = window.getSelection().getRangeAt(0).cloneRange();
-                        latestLoad = Date.now();
+                        var clientRect = oldRange.getBoundingClientRect();
                         hljs.initHighlighting.called = false;
                         hljs.initHighlighting();
-                        document.getSelection().removeAllRanges()
-                        document.getSelection().addRange(oldRange)
-                    }, 3000));
+                        document.getSelection().removeAllRanges();
+                        document.getSelection().addRange(document.caretRangeFromPoint(clientRect.x, clientRect.y + 1 ));
+                    }, 500));
                 }
             </script>
             ${if (showLineNumbers) "<script>hljs.initLineNumbersOnLoad();</script>\n" else ""}</head>
