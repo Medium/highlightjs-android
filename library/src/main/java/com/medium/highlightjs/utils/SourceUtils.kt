@@ -59,12 +59,10 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 
 .gl-highlight-overlay-mine {
     background-color: ${colorSet.mine};
-    mix-blend-mode: darken;
 }
 
 .gl-highlight-overlay-other {
     background-color: ${colorSet.others};
-    mix-blend-mode: darken;
 }
    </style>
 """
