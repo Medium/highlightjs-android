@@ -21,7 +21,7 @@ object SourceUtils {
         highlights: List<Highlight>,
         colorSet: ColorSet
     ): String {
-        return getStylePageHeader(supportZoom, colorSet) +
+        return getStylePageHeader(supportZoom, colorSet, isInDarkMode) +
                 getSourceForStyle(style) +
                 (if (showLineNumbers) lineNumberStyling else "") +
                 getScriptPageHeader(showLineNumbers, highlights = highlights) +
