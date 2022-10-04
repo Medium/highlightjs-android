@@ -17,8 +17,9 @@ object SourceUtils {
         language: String?,
         supportZoom: Boolean,
         showLineNumbers: Boolean,
+        isInDarkMode: Boolean,
         highlights: List<Highlight>,
-        colorSet:ColorSet
+        colorSet: ColorSet
     ): String {
         return getStylePageHeader(supportZoom, colorSet) +
                 getSourceForStyle(style) +
@@ -28,7 +29,7 @@ object SourceUtils {
                 templateFooter
     }
 
-    private fun getStylePageHeader(enableZoom: Boolean, colorSet: ColorSet): String {
+    private fun getStylePageHeader(enableZoom: Boolean, colorSet: ColorSet, isInDarkMode: Boolean): String {
         return """<!DOCTYPE html>
 <html>
 <head>
@@ -59,10 +60,12 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 
 .gl-highlight-overlay-mine {
     background-color: ${colorSet.mine};
+    ${if (!isInDarkMode) "mix-blend-mode: darken;" else ""}
 }
 
 .gl-highlight-overlay-other {
     background-color: ${colorSet.others};
+    ${if (!isInDarkMode) "mix-blend-mode: darken;" else ""}
 }
    </style>
 """
