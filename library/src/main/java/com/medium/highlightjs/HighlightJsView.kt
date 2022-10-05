@@ -8,6 +8,7 @@ import android.annotation.TargetApi
 import android.os.Build
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import android.util.AttributeSet
 import android.util.Log
 import android.webkit.JavascriptInterface
@@ -207,12 +208,14 @@ class HighlightJsView : WebView, FileUtils.Callback {
             content = source
             highlights = list
             highlightListener = listeners
+            val isInDarkMode = context.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
             val page = SourceUtils.generateContent(
                 source,
                 theme.getName(),
                 language.getName(),
                 zoomSupport,
                 showLineNumbers,
+                isInDarkMode,
                 list,
                 colorSet
             )
