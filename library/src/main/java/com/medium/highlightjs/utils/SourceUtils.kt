@@ -60,12 +60,12 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 
 .gl-highlight-overlay-mine {
     background-color: ${colorSet.mine};
-    ${if (!isInDarkMode) "mix-blend-mode: darken;" else ""}
+    ${if (!isInDarkMode) "mix-blend-mode: darken;" else "mix-blend-mode: lighten;"}
 }
 
 .gl-highlight-overlay-other {
     background-color: ${colorSet.others};
-    ${if (!isInDarkMode) "mix-blend-mode: darken;" else ""}
+    ${if (!isInDarkMode) "mix-blend-mode: darken;" else "mix-blend-mode: lighten;"}
 }
    </style>
 """
