@@ -1,6 +1,14 @@
+body{
+    border: solid #E5E5E5;
+    border-radius: 4px;
+    background-color: #F9F9F9;
+}
+
 pre code.hljs {
     display: block;
-    padding: 1em;
+    padding-left: 32px;
+    padding-top: 32px;
+    padding-bottom: 32px;
 }
 
 code.hljs {
@@ -9,7 +17,6 @@ code.hljs {
 
 .hljs {
     color: #24292e;
-    background: #fff
 }
 
 .hljs-doctag,
