@@ -17,11 +17,12 @@ object SourceUtils {
         language: String?,
         supportZoom: Boolean,
         showLineNumbers: Boolean,
+        isInDarkMode: Boolean,
         highlights: List<Highlight>,
         colorSet: ColorSet,
         editMode: Boolean
     ): String {
-        return getStylePageHeader(supportZoom, colorSet) +
+        return getStylePageHeader(supportZoom, colorSet, isInDarkMode) +
                 getSourceForStyle(style) +
                 (if (showLineNumbers) lineNumberStyling else "") +
                 getScriptPageHeader(showLineNumbers, highlights = highlights) +
@@ -29,7 +30,7 @@ object SourceUtils {
                 templateFooter
     }
 
-    private fun getStylePageHeader(enableZoom: Boolean, colorSet: ColorSet): String {
+    private fun getStylePageHeader(enableZoom: Boolean, colorSet: ColorSet, isInDarkMode: Boolean): String {
         return """<!DOCTYPE html>
 <html>
 <head>
@@ -60,12 +61,12 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 
 .gl-highlight-overlay-mine {
     background-color: ${colorSet.mine};
-    mix-blend-mode: darken;
+    ${if (!isInDarkMode) "mix-blend-mode: darken;" else "mix-blend-mode: lighten;"}
 }
 
 .gl-highlight-overlay-other {
     background-color: ${colorSet.others};
-    mix-blend-mode: darken;
+    ${if (!isInDarkMode) "mix-blend-mode: darken;" else "mix-blend-mode: lighten;"}
 }
    </style>
 """
