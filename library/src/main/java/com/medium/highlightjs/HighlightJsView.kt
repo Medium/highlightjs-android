@@ -43,6 +43,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     var colorSet: ColorSet = ColorSet(mine = "#85F8CA", others = "#E5FDF3")
     var selectionCallback: SelectionCallback? = null
     var editMode: Boolean = false
+    var latestText: String = ""
 
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
@@ -292,6 +293,11 @@ class HighlightJsView : WebView, FileUtils.Callback {
         @JavascriptInterface
         fun onHighlightClick(index: Int) {
             highlightListener[index]()
+        }
+
+        @JavascriptInterface
+        fun onTextChange(text: String) {
+            latestText = text
         }
     }
 }

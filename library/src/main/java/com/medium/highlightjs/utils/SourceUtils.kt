@@ -100,6 +100,8 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                         hljs.initHighlighting();
                         document.getSelection().removeAllRanges();
                         document.getSelection().addRange(document.caretRangeFromPoint(clientRect.x, clientRect.y + 1 ));
+
+                        jsBridge.onTextChange(codeElement.innerText);
                     }, 500));
                 }
             </script>
