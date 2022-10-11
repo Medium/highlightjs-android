@@ -18,6 +18,7 @@ import com.medium.highlightjs.utils.FileUtils
 import com.medium.highlightjs.utils.SourceUtils
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.File
 import java.net.URL
 
@@ -45,6 +46,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     var selectionCallback: SelectionCallback? = null
     var editMode: Boolean = false
     var latestText: String? = null
+    var autoLang: Language? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
@@ -216,7 +218,8 @@ class HighlightJsView : WebView, FileUtils.Callback {
             content = source
             highlights = list
             highlightListener = listeners
-            val isInDarkMode = context.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+            val isInDarkMode =
+                context.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
             val page = SourceUtils.generateContent(
                 source,
                 theme.getName(),
@@ -299,8 +302,11 @@ class HighlightJsView : WebView, FileUtils.Callback {
         }
 
         @JavascriptInterface
-        fun onTextChange(text: String) {
+        fun onTextChange(text: String, lang: String) {
             latestText = text
+            autoLang = Language.values().firstOrNull {
+                it.getName() == lang
+            }
         }
     }
 }

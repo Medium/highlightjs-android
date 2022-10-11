@@ -102,7 +102,7 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                         document.getSelection().removeAllRanges();
                         document.getSelection().addRange(document.caretRangeFromPoint(clientRect.x, clientRect.y + 1 ));
 
-                        jsBridge.onTextChange(codeElement.innerText);
+                        jsBridge.onTextChange(codeElement.innerText, hljs.getLanguage(codeElement.classList[1]).aliases[0]);
                     }, 500));
                 }
             </script>
