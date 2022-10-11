@@ -44,7 +44,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     var colorSet: ColorSet = ColorSet(mine = "#85F8CA", others = "#E5FDF3")
     var selectionCallback: SelectionCallback? = null
     var editMode: Boolean = false
-    var latestText: String = ""
+    var latestText: String? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
