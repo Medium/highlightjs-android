@@ -111,7 +111,7 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                         }
                         
                         jsBridge.onTextChange(codeElement.innerText, languageOut);
-                    }, 500));
+                    }, 250));
                 }
             </script>
             ${if (showLineNumbers) "<script>hljs.initLineNumbersOnLoad();</script>\n" else ""}</head>
