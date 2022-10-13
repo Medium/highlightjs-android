@@ -68,7 +68,6 @@ class SyntaxActivity : AppCompatActivity(), OnRefreshListener, OnThemeChangedLis
                 .replace(R.id.activity_main, FilesListFragment.newInstance())
                 .commit();
     }
-
 }
 """
         highlightJsView?.highlightLanguage = Language.JAVA

@@ -16,6 +16,9 @@ import android.webkit.WebSettings
 import com.medium.highlightjs.models.*
 import com.medium.highlightjs.utils.FileUtils
 import com.medium.highlightjs.utils.SourceUtils
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.File
 import java.net.URL
 
@@ -39,8 +42,11 @@ class HighlightJsView : WebView, FileUtils.Callback {
     private var onThemeChangedListener: OnThemeChangedListener? = null
     private var onContentChangedListener: OnContentChangedListener? = null
 
-    var colorSet: ColorSet = ColorSet(mine = "#85F8CA", others= "#E5FDF3")
+    var colorSet: ColorSet = ColorSet(mine = "#85F8CA", others = "#E5FDF3")
     var selectionCallback: SelectionCallback? = null
+    var editMode: Boolean = false
+    var latestText: String? = null
+    var autoLang: Language? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
@@ -202,13 +208,18 @@ class HighlightJsView : WebView, FileUtils.Callback {
         setSource(source, emptyList(), emptyList())
     }
 
-    fun setSource(source: String?, list: List<Highlight>, listeners: List<(() -> Unit)>) {
+    fun setSource(
+        source: String?,
+        list: List<Highlight>,
+        listeners: List<(() -> Unit)>
+    ) {
         if (source != null && source.length != 0) {
             //generate and load the content
             content = source
             highlights = list
             highlightListener = listeners
-            val isInDarkMode = context.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+            val isInDarkMode =
+                context.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
             val page = SourceUtils.generateContent(
                 source,
                 theme.getName(),
@@ -217,7 +228,8 @@ class HighlightJsView : WebView, FileUtils.Callback {
                 showLineNumbers,
                 isInDarkMode,
                 list,
-                colorSet
+                colorSet,
+                editMode
             )
             val start = System.currentTimeMillis()
             try {
@@ -287,6 +299,14 @@ class HighlightJsView : WebView, FileUtils.Callback {
         @JavascriptInterface
         fun onHighlightClick(index: Int) {
             highlightListener[index]()
+        }
+
+        @JavascriptInterface
+        fun onTextChange(text: String, lang: String) {
+            latestText = text
+            autoLang = Language.values().firstOrNull {
+                it.getName() == lang
+            }
         }
     }
 }
