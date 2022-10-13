@@ -101,8 +101,16 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                         hljs.initHighlighting();
                         document.getSelection().removeAllRanges();
                         document.getSelection().addRange(document.caretRangeFromPoint(clientRect.x, clientRect.y + 1 ));
-
-                        jsBridge.onTextChange(codeElement.innerText, hljs.getLanguage(codeElement.classList[1]).aliases[0]);
+                        
+                        var language = hljs.getLanguage(codeElement.classList[1]);
+                        var languageOut;
+                        if(language.aliases != undefined){
+                            languageOut = language.aliases[0];
+                        } else {
+                            languageOut = language.name;
+                        }
+                        
+                        jsBridge.onTextChange(codeElement.innerText, languageOut);
                     }, 500));
                 }
             </script>
