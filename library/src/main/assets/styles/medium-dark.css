@@ -9,6 +9,9 @@ pre code.hljs {
     padding-left: 32px;
     padding-top: 32px;
     padding-bottom: 32px;
+}
+
+[contenteditable] {
     outline: 1px solid #808080;
 }
 
