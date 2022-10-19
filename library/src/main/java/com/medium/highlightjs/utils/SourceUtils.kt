@@ -74,7 +74,7 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 
     private fun getScriptPageHeader(showLineNumbers: Boolean, highlights: List<Highlight>): String {
         return """    <script src="./highlight.pack.js"></script>
-            ${if (showLineNumbers) "<script src=\"./highlightjs-line-numbers.min.js\"></script>\n" else ""}    <script>hljs.initHighlightingOnLoad();</script>
+            ${if (showLineNumbers) "<script src=\"./highlightjs-line-numbers.min.js\"></script>\n" else ""}    <script>hljs.highlightAll();</script>
 	        <script src="./selection.js"></script>
             <script>selection.setup();</script>
            	<script src="./highlight.js"></script>
@@ -97,13 +97,14 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                     codeElement.addEventListener('input', debounce(function(event) {
                         var oldRange = window.getSelection().getRangeAt(0).cloneRange();
                         var clientRect = oldRange.getBoundingClientRect();
+                        codeElement.classList.forEach( function(element){if(element.startsWith("language")) {codeElement.classList.remove(element);} });
                         hljs.initHighlighting.called = false;
-                        hljs.initHighlighting();
+                        hljs.highlightAll();
                         document.getSelection().removeAllRanges();
                         document.getSelection().addRange(document.caretRangeFromPoint(clientRect.x, clientRect.y + 1 ));
                         
-                        var language = hljs.getLanguage(codeElement.classList[1]);
-                        var languageOut;
+                        var language = hljs.getLanguage(codeElement.classList[1].replace("language-", ""));
+                        var languageOut ="";
                         if(language.aliases != undefined){
                             languageOut = language.aliases[0];
                         } else {
