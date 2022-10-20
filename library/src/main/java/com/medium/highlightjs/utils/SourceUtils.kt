@@ -95,6 +95,9 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                     applyHighlights(${Json.encodeToString(highlights)});
                     var codeElement = document.getElementsByTagName("code")[0];
                     codeElement.addEventListener('input', debounce(function(event) {
+                        if(event.inputType == 'insertParagraph') {
+                            return;
+                        }
                         var oldRange = window.getSelection().getRangeAt(0).cloneRange();
                         var clientRect = oldRange.getBoundingClientRect();
                         codeElement.classList.forEach( function(element){if(element.startsWith("language")) {codeElement.classList.remove(element);} });
@@ -153,12 +156,12 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
     private fun getSourceForLanguage(source: String, language: String?, editMode: Boolean): String {
         return if (language != null) {
             String.format(
-                "<pre><code ${if (editMode)"contentEditable=\"true\"" else ""} class=\"%s\">%s</code></pre>\n",
+                "<pre><code ${if (editMode) "contentEditable=\"true\"" else ""} class=\"%s\">%s</code></pre>\n",
                 language,
                 formatCode(source)
             )
         } else {
-            String.format("<pre><code ${if (editMode)"contentEditable=\"true\"" else ""}>%s</code></pre>\n", formatCode(source))
+            String.format("<pre><code ${if (editMode) "contentEditable=\"true\"" else ""}>%s</code></pre>\n", formatCode(source))
         }
     }
 }
