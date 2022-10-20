@@ -6,9 +6,13 @@ body{
 
 pre code.hljs {
     display: block;
-    padding-left: 32px;
-    padding-top: 32px;
-    padding-bottom: 32px;
+    padding-left: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+:focus-visible {
+    outline: 1px auto #6B6B6B;
 }
 
 code.hljs {
