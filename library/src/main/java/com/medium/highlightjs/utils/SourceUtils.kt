@@ -110,7 +110,9 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 
                         var language = hljs.getLanguage(codeElement.classList[1].replace("language-", ""));
                         var languageOut ="";
-                        if(language.aliases != undefined){
+                        if(language == undefined){
+                            languageOut = "";
+                        } else if(language.aliases != undefined){
                             languageOut = language.aliases[0];
                         } else {
                             languageOut = language.name;
