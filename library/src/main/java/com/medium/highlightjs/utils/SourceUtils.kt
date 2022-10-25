@@ -74,7 +74,7 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 
     private fun getScriptPageHeader(showLineNumbers: Boolean, highlights: List<Highlight>): String {
         return """    <script src="./highlight.pack.js"></script>
-            ${if (showLineNumbers) "<script src=\"./highlightjs-line-numbers.min.js\"></script>\n" else ""}    <script>hljs.initHighlightingOnLoad();</script>
+            ${if (showLineNumbers) "<script src=\"./highlightjs-line-numbers.min.js\"></script>\n" else ""}<script>hljs.highlightAll();</script>
 	        <script src="./selection.js"></script>
             <script>selection.setup();</script>
            	<script src="./highlight.js"></script>
@@ -95,16 +95,24 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                     applyHighlights(${Json.encodeToString(highlights)});
                     var codeElement = document.getElementsByTagName("code")[0];
                     codeElement.addEventListener('input', debounce(function(event) {
+                        if(event.inputType == 'insertParagraph') {
+                            return;
+                        }
                         var oldRange = window.getSelection().getRangeAt(0).cloneRange();
                         var clientRect = oldRange.getBoundingClientRect();
-                        hljs.initHighlighting.called = false;
-                        hljs.initHighlighting();
+                        codeElement.classList.forEach( function(element){if(element.startsWith("language")) {codeElement.classList.remove(element);} });
+                        var highlighted = hljs.highlightAuto(codeElement.innerText);
+                
+                        codeElement.innerHTML = highlighted.value;
+                        hljs.highlightAll();
                         document.getSelection().removeAllRanges();
                         document.getSelection().addRange(document.caretRangeFromPoint(clientRect.x, clientRect.y + 1 ));
-                        
-                        var language = hljs.getLanguage(codeElement.classList[1]);
-                        var languageOut;
-                        if(language.aliases != undefined){
+
+                        var language = hljs.getLanguage(codeElement.classList[1].replace("language-", ""));
+                        var languageOut ="";
+                        if(language == undefined){
+                            languageOut = "";
+                        } else if(language.aliases != undefined){
                             languageOut = language.aliases[0];
                         } else {
                             languageOut = language.name;
@@ -150,12 +158,12 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
     private fun getSourceForLanguage(source: String, language: String?, editMode: Boolean): String {
         return if (language != null) {
             String.format(
-                "<pre><code ${if (editMode)"contentEditable=\"true\"" else ""} class=\"%s\">%s</code></pre>\n",
+                "<pre><code ${if (editMode) "contentEditable=\"true\"" else ""} class=\"%s\">%s</code></pre>\n",
                 language,
                 formatCode(source)
             )
         } else {
-            String.format("<pre><code ${if (editMode)"contentEditable=\"true\"" else ""}>%s</code></pre>\n", formatCode(source))
+            String.format("<pre><code ${if (editMode) "contentEditable=\"true\"" else ""}>%s</code></pre>\n", formatCode(source))
         }
     }
 }

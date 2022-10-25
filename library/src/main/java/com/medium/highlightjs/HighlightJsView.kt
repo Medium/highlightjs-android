@@ -223,7 +223,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
             val page = SourceUtils.generateContent(
                 source,
                 theme.getName(),
-                language.getName(),
+                language.languageName,
                 zoomSupport,
                 showLineNumbers,
                 isInDarkMode,
@@ -305,7 +305,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
         fun onTextChange(text: String, lang: String) {
             latestText = text
             autoLang = Language.values().firstOrNull {
-                it.getName() == lang
+                it.languageName == lang
             }
         }
     }

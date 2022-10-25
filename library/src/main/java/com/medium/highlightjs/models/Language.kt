@@ -1,26 +1,28 @@
-package com.medium.highlightjs.models;
+package com.medium.highlightjs.models
 
 /**
  * This Class was created by Patrick J
  * on 09.06.16. For more Details and Licensing
  * have a look at the README.md
  */
-
-@SuppressWarnings("SpellCheckingInspection")
-public enum Language {
+enum class Language(val languageName: String?) {
     AUTO_DETECT(null),
     DISABLE_HIGHLIGHT("nohighlight"),
     _1C("1c"),
     ABNF("abnf"),
     ACCESS_LOGS("accesslog"),
     ADA("ada"),
-    ARM_ASSEMBLER("arm"),
+    ARM_ASSEMBLER(
+        "arm"
+    ),
     AVR_ASSEMBLER("avrasm"),
     ACTION_SCRIPT("actionscript"),
     ANGLE_SCRIPT("anglescript"),
     APACHE("apache"),
     APPLE_SCRIPT("applescript"),
-    ASCII_DOC("asciidoc"),
+    ASCII_DOC(
+        "asciidoc"
+    ),
     ASPECT_J("aspectj"),
     AUTO_HOTKEY("autohotkey"),
     AUTO_IT("autoit"),
@@ -28,7 +30,9 @@ public enum Language {
     AWK("awk"),
     BASH("bash"),
     SHELL("sh"),
-    ZSH("zsh"),
+    ZSH(
+        "zsh"
+    ),
     BASIC("basic"),
     BNF("bnf"),
     BRAINFUCK("brainfuck"),
@@ -36,7 +40,9 @@ public enum Language {
     C_SHARP("csharp"),
     C_PLUS_PLUS("cpp"),
     C_AL("cal"),
-    CACHE_OBJECT_SCRIPT("cos"),
+    CACHE_OBJECT_SCRIPT(
+        "cos"
+    ),
     C_MAKE("cmake"),
     COQ("coq"),
     CSP("csp"),
@@ -45,14 +51,18 @@ public enum Language {
     CHAOS("chaos"),
     CISCO_CLI("cisco"),
     CLEAN("clean"),
-    CLOJURE("clojure"),
+    CLOJURE(
+        "clojure"
+    ),
     COFFEE_SCRIPT("coffeescript"),
     CPCDOSC_PLUS("cpc"),
     CRMSH("crmsh"),
     CRYSTAL("crystal"),
     CYPHER_NEO4J("cypher"),
     D("d"),
-    DNS_ZONE_FILE("dns"),
+    DNS_ZONE_FILE(
+        "dns"
+    ),
     DOS("dos"),
     BATCH("bat"),
     DART("dart"),
@@ -60,7 +70,9 @@ public enum Language {
     DIFF("diff"),
     DJANGO("django"),
     DOCKER_FILE("dockerfile"),
-    DSCONFIG("dsconfig"),
+    DSCONFIG(
+        "dsconfig"
+    ),
     DTS("dts"),
     DUST("dust"),
     DYLAN("dylan"),
@@ -69,7 +81,9 @@ public enum Language {
     ELM("elm"),
     ERLANG("erlang"),
     EXCEL("excel"),
-    F_SHARP("fsharp"),
+    F_SHARP(
+        "fsharp"
+    ),
     FIX("fix"),
     FLIX("flix"),
     FORTRAN("fortran"),
@@ -78,7 +92,9 @@ public enum Language {
     GAUSS("gauss"),
     GDSCRIPT("godot"),
     GHERKIN("gherkin"),
-    GN_FOR_NINJA("gn"),
+    GN_FOR_NINJA(
+        "gn"
+    ),
     GO("go"),
     GRAMMATICAL_FRAMEWORK("gf"),
     GOLO("golo"),
@@ -87,7 +103,9 @@ public enum Language {
     HTML("html"),
     XML("xml"),
     HTTP("http"),
-    HAML("haml"),
+    HAML(
+        "haml"
+    ),
     HANDLEBARS("hbs"),
     HASKELL("hs"),
     HAXE("hx"),
@@ -97,17 +115,21 @@ public enum Language {
     IRPF90("irpf90"),
     JSON("json"),
     JAVA("java"),
-    JAVA_SCRIPT("javascript"),
+    JAVA_SCRIPT(
+        "javascript"
+    ),
     JOLIE("ol"),
     KOTLIN("kt"),
     LATEX("tex"),
     LASSO("lasso"),
-	LEAF("leaf"),
+    LEAF("leaf"),
     LEAN("lean"),
     LESS("less"),
     LDIF("ldif"),
     LISP("lisp"),
-    LIVE_CODE_SERVER("livecodeserver"),
+    LIVE_CODE_SERVER(
+        "livecodeserver"
+    ),
     LIVE_SCRIPT("livescript"),
     LLVM("llvm"),
     LUA("lua"),
@@ -115,26 +137,34 @@ public enum Language {
     MARKDOWN("md"),
     MATHEMATICA("mma"),
     MATLAB("matlab"),
-    MAXIMA("maxima"),
+    MAXIMA(
+        "maxima"
+    ),
     MAYA_EMBEDDED_LANGUAGE("mel"),
     MERCURY("mercury"),
     MIRC_SCRIPTING_LANGUAGE("mrc"),
     MIZAR("mizar"),
     MOJOLICIOUS("mojolicious"),
-    MONKEY("monkey"),
+    MONKEY(
+        "monkey"
+    ),
     MOONSCRIPT("moonscript"),
-	N1QL("n1ql"),
+    N1QL("n1ql"),
     NSIS("nsis"),
     NGINX("nginx"),
     NIMROD("nimrod"),
     NIX("nix"),
-    OBJECTIVE_CONSTRAINT_LANGUAGE("ocl"),
+    OBJECTIVE_CONSTRAINT_LANGUAGE(
+        "ocl"
+    ),
     O_CAML("ocaml"),
     OBJECTIVE_C("objectivec"),
     OPENGL_SHADING_LANGUAGE("glsl"),
     OPEN_SCAD("scad"),
     ORACLE_RULES_LANGUAGE("ruleslanguage"),
-    OXYGENE("oxygene"),
+    OXYGENE(
+        "oxygene"
+    ),
     PF("pf"),
     PHP("php"),
     PARSER3("parser3"),
@@ -143,13 +173,17 @@ public enum Language {
     PONY("pony"),
     POSTGRE_SQL("pgsql"),
     POWER_SHELL("ps"),
-    PROCESSING("processing"),
+    PROCESSING(
+        "processing"
+    ),
     PROLOG("prolog"),
     PROPERTIES("properties"),
     PROTOCOL_BUFFERS("protobuf"),
     PUPPET("pp"),
     PYTHON("python"),
-    PYTHON_PROFILER_RESULTS("profile"),
+    PYTHON_PROFILER_RESULTS(
+        "profile"
+    ),
     PYTHON_REPL("pycon"),
     Q("k"),
     QML("qml"),
@@ -157,7 +191,9 @@ public enum Language {
     RAZOR_CSHTML("razor"),
     REASON_ML("re"),
     RENDER_MAN_RIB("rib"),
-    RENDER_MAN_RSL("rsl"),
+    RENDER_MAN_RSL(
+        "rsl"
+    ),
     ROBOCONF("roboconf"),
     RUBY("ruby"),
     RUST("rust"),
@@ -166,7 +202,9 @@ public enum Language {
     SQL("sql"),
     STEP_PART_21("p21"),
     SCALA("scala"),
-    SCHEME("scheme"),
+    SCHEME(
+        "scheme"
+    ),
     SCILAB("sci"),
     SMALI("smali"),
     SMALLTALK("smalltalk"),
@@ -174,7 +212,9 @@ public enum Language {
     STATA("stata"),
     STYLUS("stylus"),
     SUB_UNIT("subunit"),
-    SWIFT("swift"),
+    SWIFT(
+        "swift"
+    ),
     TEST_ANYTHING_PROTOCOL("tap"),
     TCL("tcl"),
     TEX("tex"),
@@ -182,7 +222,9 @@ public enum Language {
     TP("tp"),
     TWIG("twig"),
     TYPE_SCRIPT("typescript"),
-    VB_NET("vbnet"),
+    VB_NET(
+        "vbnet"
+    ),
     VB_SCRIPT("vbscript"),
     VHDL("vhdl"),
     VALA("vala"),
@@ -191,16 +233,44 @@ public enum Language {
     X86_ASSEMBLY("x86asm"),
     XL("xl"),
     X_QUERY("xq"),
-    ZEPHIR("zep");
+    ZEPHIR(
+        "zep"
+    );
 
-    private final String className;
-
-    Language(String name) {
-        this.className = name;
-    }
-
-    public String getName() {
-        return className;
+    companion object {
+        val MEDIUM_SUBLIST = listOf(
+            BASH,
+            C,
+            C_SHARP,
+            C_PLUS_PLUS,
+            CSS,
+            DIFF,
+            GO,
+            HTML,
+            JSON,
+            JAVA,
+            JAVA_SCRIPT,
+            KOTLIN,
+            LESS,
+            LUA,
+            MAKEFILE,
+            MARKDOWN,
+            OBJECTIVE_C,
+            PHP,
+            PERL,
+            PLAIN_TEXT,
+            PYTHON,
+            PYTHON_REPL,
+            R,
+            RUBY,
+            RUST,
+            SCSS,
+            SQL,
+            SHELL,
+            SWIFT,
+            TYPE_SCRIPT,
+            VB_NET
+        )
     }
 
 }

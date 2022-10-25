@@ -166,6 +166,6 @@ class SyntaxActivity : AppCompatActivity(), OnRefreshListener, OnThemeChangedLis
     }
 
     override fun onLanguageChanged(language: Language) {
-        Toast.makeText(this, language.getName(), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, language.languageName, Toast.LENGTH_LONG).show()
     }
 }
