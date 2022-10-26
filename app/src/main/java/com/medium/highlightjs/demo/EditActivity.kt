@@ -34,6 +34,6 @@ class EditActivity : AppCompatActivity() {
 
         binding.hjsview.editMode = true
         binding.hjsview.setTheme(Theme.MEDIUM_LIGHT)
-        binding.hjsview.setSource("\n")
+        binding.hjsview.setSource(source)
     }
 }
