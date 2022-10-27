@@ -5,10 +5,13 @@ body{
 }
 
 pre code.hljs {
-    display: block;
+    min-width: 100%;
+    display: inline-block;
+    padding-right: 24px;
     padding-left: 24px;
     padding-top: 24px;
     padding-bottom: 24px;
+    box-sizing: border-box;
 }
 
 :focus-visible {
