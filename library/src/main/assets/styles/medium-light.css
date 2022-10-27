@@ -5,8 +5,9 @@ body{
 }
 
 pre code.hljs {
-    min-width: 100%;
+    min-width: 87.5%;
     display: inline-block;
+    padding-right: 24px;
     padding-left: 24px;
     padding-top: 24px;
     padding-bottom: 24px;
