@@ -53,7 +53,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     var editMode: Boolean = false
     var latestText: String? = null
     var autoLang: Language? = null
-    var eventKeyHandler: ((keyEvent: KeyEvent?) -> Boolean)? = null
+    var eventKeyHandler: ((keyEvent: KeyEvent) -> Boolean)? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
@@ -298,12 +298,12 @@ class HighlightJsView : WebView, FileUtils.Callback {
     }
 
     override fun onCreateInputConnection(outAttrs: EditorInfo?): InputConnection {
-        val out = object : BaseInputConnection(this, false) {
+        return object : BaseInputConnection(this, false) {
             override fun sendKeyEvent(event: KeyEvent?): Boolean {
-                return  if(eventKeyHandler?.invoke(event) == true) true else super.sendKeyEvent(event)
+                return if (event!= null && eventKeyHandler?.invoke(event) == true) true
+                else super.sendKeyEvent(event)
             }
         }
-        return out
     }
 
     inner class JsInterface() {
