@@ -25,7 +25,7 @@ object SourceUtils {
         return getStylePageHeader(supportZoom, colorSet, isInDarkMode) +
                 getSourceForStyle(style) +
                 (if (showLineNumbers) lineNumberStyling else "") +
-                getScriptPageHeader(showLineNumbers, highlights = highlights) +
+                getScriptPageHeader(showLineNumbers, editMode, highlights = highlights) +
                 getSourceForLanguage(source, language, editMode) +
                 templateFooter
     }
@@ -72,11 +72,11 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
 """
     }
 
-    private fun getScriptPageHeader(showLineNumbers: Boolean, highlights: List<Highlight>): String {
+    private fun getScriptPageHeader(showLineNumbers: Boolean, isInEditMode: Boolean, highlights: List<Highlight>): String {
         return """    <script src="./highlight.pack.js"></script>
             ${if (showLineNumbers) "<script src=\"./highlightjs-line-numbers.min.js\"></script>\n" else ""}<script>hljs.highlightAll();</script>
 	        <script src="./selection.js"></script>
-            <script>selection.setup();</script>
+            <script>selection.setup($isInEditMode);</script>
            	<script src="./highlight.js"></script>
            	<script>
                 const debounce = (func, delay) => {

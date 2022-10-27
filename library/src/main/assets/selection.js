@@ -21,8 +21,10 @@ var selection = {
         }
     },
 
-    setup: function(){
-        document.oncontextmenu = function(e) { e.preventDefault(); };
+    setup: function(isInEditMode){
+        if (!isInEditMode) {
+            document.oncontextmenu = function(e) { e.preventDefault(); };
+        }
         document.onselectionchange = selection.onSelectionChange;
         document.addEventListener("click", function(event) {
             var posX = event.clientX;
