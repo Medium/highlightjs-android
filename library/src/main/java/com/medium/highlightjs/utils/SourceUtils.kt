@@ -95,7 +95,6 @@ ${if (enableZoom) "" else "    <meta name=\"viewport\" content=\"width=device-wi
                     applyHighlights(${Json.encodeToString(highlights)});
                     var codeElement = document.getElementsByTagName("code")[0];
                     codeElement.addEventListener('input', debounce(function(event) {
-                        console.log(JSON.stringify(event));
                         if(event.inputType == 'insertParagraph') {
                             return;
                         }
