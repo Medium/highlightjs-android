@@ -11,8 +11,14 @@ import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
 import android.util.Log
+import android.view.KeyEvent
+import android.view.inputmethod.BaseInputConnection
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputConnection
+import android.view.inputmethod.InputConnectionWrapper
 import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
+import android.widget.Toast
 import com.medium.highlightjs.models.*
 import com.medium.highlightjs.utils.FileUtils
 import com.medium.highlightjs.utils.SourceUtils
@@ -47,6 +53,7 @@ class HighlightJsView : WebView, FileUtils.Callback {
     var editMode: Boolean = false
     var latestText: String? = null
     var autoLang: Language? = null
+    var eventKeyHandler: ((keyEvent: KeyEvent?) -> Boolean)? = null
 
     override fun onDataLoaded(success: Boolean, source: String?) {
         if (success) setSource(source)
@@ -288,6 +295,15 @@ class HighlightJsView : WebView, FileUtils.Callback {
      */
     fun setShowLineNumbers(showLineNumbers: Boolean) {
         this.showLineNumbers = showLineNumbers
+    }
+
+    override fun onCreateInputConnection(outAttrs: EditorInfo?): InputConnection {
+        val out = object : BaseInputConnection(this, false) {
+            override fun sendKeyEvent(event: KeyEvent?): Boolean {
+                return  if(eventKeyHandler?.invoke(event) == true) true else super.sendKeyEvent(event)
+            }
+        }
+        return out
     }
 
     inner class JsInterface() {
