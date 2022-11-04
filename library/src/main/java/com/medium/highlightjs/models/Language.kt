@@ -96,6 +96,7 @@ enum class Language(val languageName: String?) {
         "gn"
     ),
     GO("go"),
+    GRAPHQL("graphql"),
     GRAMMATICAL_FRAMEWORK("gf"),
     GOLO("golo"),
     GRADLE("gradle"),
@@ -167,6 +168,7 @@ enum class Language(val languageName: String?) {
     ),
     PF("pf"),
     PHP("php"),
+    PHP_TEMPLATE("php-template"),
     PARSER3("parser3"),
     PERL("perl"),
     PLAIN_TEXT("txt"),
@@ -233,6 +235,8 @@ enum class Language(val languageName: String?) {
     X86_ASSEMBLY("x86asm"),
     XL("xl"),
     X_QUERY("xq"),
+    WASM("wasm"),
+    YAML("yaml"),
     ZEPHIR(
         "zep"
     );
@@ -246,6 +250,8 @@ enum class Language(val languageName: String?) {
             CSS,
             DIFF,
             GO,
+            GRAPHQL,
+            INI,
             HTML,
             JSON,
             JAVA,
@@ -253,10 +259,12 @@ enum class Language(val languageName: String?) {
             KOTLIN,
             LESS,
             LUA,
+            XML,
             MAKEFILE,
             MARKDOWN,
             OBJECTIVE_C,
             PHP,
+            PHP_TEMPLATE,
             PERL,
             PLAIN_TEXT,
             PYTHON,
@@ -269,7 +277,9 @@ enum class Language(val languageName: String?) {
             SHELL,
             SWIFT,
             TYPE_SCRIPT,
-            VB_NET
+            VB_NET,
+            WASM,
+            YAML
         )
     }
 
