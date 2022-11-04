@@ -26,89 +26,88 @@ code.hljs {
     color: #c9d1d9;
 }
 
-.hljs-doctag,
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
 .hljs-keyword,
-.hljs-meta .hljs-keyword,
-.hljs-template-tag,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
 .hljs-template-variable,
-.hljs-type,
-.hljs-variable.language_ {
-    color: #F55189
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
 }
 
 .hljs-title,
-.hljs-title.class_,
-.hljs-title.class_.inherited__,
-.hljs-title.function_ {
-    color: #9E39FF
-}
-
-.hljs-attr,
-.hljs-attribute,
-.hljs-literal,
-.hljs-meta,
-.hljs-number,
-.hljs-operator,
-.hljs-selector-attr,
-.hljs-selector-class,
-.hljs-selector-id,
-.hljs-variable {
-    color: #437AFF
-}
-
-.hljs-meta .hljs-string,
-.hljs-regexp,
-.hljs-string {
-    color: #a5d6ff
-}
-
-.hljs-built_in,
-.hljs-symbol {
-    color: #F55189
-}
-
-.hljs-code,
-.hljs-comment,
-.hljs-formula {
-    color: #8b949e
-}
-
-.hljs-name,
-.hljs-quote,
-.hljs-selector-pseudo,
-.hljs-selector-tag {
-    color: #40993D
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
 }
 
 .hljs-subst {
-    color: #c9d1d9
+  font-weight: normal;
 }
 
-.hljs-section {
-    color: #1f6feb;
-    font-weight: 700
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
 }
 
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
 .hljs-bullet {
-    color: #f2cc60
+  color: #990073;
 }
 
-.hljs-emphasis {
-    color: #c9d1d9;
-    font-style: italic
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
 }
 
-.hljs-strong {
-    color: #c9d1d9;
-    font-weight: 700
-}
-
-.hljs-addition {
-    color: #aff5b4;
-    background-color: #033a16
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
 }
 
 .hljs-deletion {
-    color: #ffdcd7;
-    background-color: #67060c
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
 }

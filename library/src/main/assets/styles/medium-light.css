@@ -26,89 +26,93 @@ code.hljs {
     color: #24292e;
 }
 
-.hljs-doctag,
-.hljs-keyword,
-.hljs-meta .hljs-keyword,
-.hljs-template-tag,
-.hljs-template-variable,
-.hljs-type,
-.hljs-variable.language_ {
-    color: #F55189
+/* Gray DOCTYPE selectors like WebKit */
+.xml .hljs-meta {
+  color: #c0c0c0;
 }
 
-.hljs-title,
-.hljs-title.class_,
-.hljs-title.class_.inherited__,
-.hljs-title.function_ {
-    color: #9E39FF
+.hljs-comment,
+.hljs-quote {
+  color: #007400;
 }
 
-.hljs-attr,
+.hljs-tag,
 .hljs-attribute,
+.hljs-keyword,
+.hljs-selector-tag,
 .hljs-literal,
-.hljs-meta,
-.hljs-number,
-.hljs-operator,
-.hljs-selector-attr,
-.hljs-selector-class,
-.hljs-selector-id,
-.hljs-variable {
-    color: #437AFF
+.hljs-name {
+  color: #aa0d91;
 }
 
-.hljs-meta .hljs-string,
-.hljs-regexp,
-.hljs-string {
-    color: #032f62
-}
-
-.hljs-built_in,
-.hljs-symbol {
-    color: #F55189
+.hljs-variable,
+.hljs-template-variable {
+  color: #3F6E74;
 }
 
 .hljs-code,
-.hljs-comment,
-.hljs-formula {
-    color: #6a737d
+.hljs-string,
+.hljs-meta-string {
+  color: #c41a16;
 }
 
-.hljs-name,
-.hljs-quote,
-.hljs-selector-pseudo,
-.hljs-selector-tag {
-    color: #40993D
+.hljs-regexp,
+.hljs-link {
+  color: #0E0EFF;
+}
+
+.hljs-title,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-number {
+  color: #1c00cf;
+}
+
+.hljs-section,
+.hljs-meta {
+  color: #643820;
+}
+
+
+.hljs-class .hljs-title,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-params {
+  color: #5c2699;
+}
+
+.hljs-attr {
+  color: #836C28;
 }
 
 .hljs-subst {
-    color: #24292e
+  color: #000;
 }
 
-.hljs-section {
-    color: #437AFF;
-    font-weight: 700
-}
-
-.hljs-bullet {
-    color: #735c0f
-}
-
-.hljs-emphasis {
-    color: #24292e;
-    font-style: italic
-}
-
-.hljs-strong {
-    color: #24292e;
-    font-weight: 700
+.hljs-formula {
+  background-color: #eee;
+  font-style: italic;
 }
 
 .hljs-addition {
-    color: #6a737d;
-    background-color: #f0fff4
+  background-color: #baeeba;
 }
 
 .hljs-deletion {
-    color: #F55189;
-    background-color: #ffeef0
+  background-color: #ffc8bd;
+}
+
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #9b703f;
+}
+
+.hljs-doctag,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
 }
