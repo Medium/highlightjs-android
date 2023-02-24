@@ -2,7 +2,6 @@ package com.pddstudio.highlightjs.demo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
 import com.medium.highlightjs.demo.databinding.ActivityEditBinding
 import com.medium.highlightjs.models.Theme
 

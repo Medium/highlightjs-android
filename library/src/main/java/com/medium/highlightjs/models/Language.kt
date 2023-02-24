@@ -248,6 +248,7 @@ enum class Language(val languageName: String?) {
             C_SHARP,
             C_PLUS_PLUS,
             CSS,
+            DART,
             DIFF,
             GO,
             GRAPHQL,
